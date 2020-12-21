@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class MainActivity extends AppCompatActivity {
     //private static String DIRECTION = "https://www.youtube.com/watch?v=djV11Xbc914";
     private static String DIRECTION =
-            "http://192.168.1.100:8080/ejemplo/";
+            "http://192.168.0.5:8080/ejemplo/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         webView.setWebViewClient(new MyWebViewClient());
         webView.loadUrl(DIRECTION);
+        simpleSnackbar(findViewById(R.id.coordinatorLayout));
     }
 
     @Override
@@ -46,5 +50,10 @@ public class MainActivity extends AppCompatActivity {
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             return super.shouldOverrideUrlLoading(view, request);
         }
+    }
+
+    public void simpleSnackbar (View view) {
+        Snackbar mySnack = Snackbar.make(findViewById(R.id.coordinatorLayout), DIRECTION, Snackbar.LENGTH_SHORT);
+        mySnack.show();
     }
 }
